@@ -11,10 +11,10 @@ public class BounceTransitionHelper : TransitionHelper
     [ContextMenu("Test Bounce")]
     public void TestTransition()
     {
-        StartTransition(delay: delay);
+        StartTransition();
     }
 
-    public override void StartTransition(Action onCompleteTransition = null, float delay = 0, bool reverseTransition = false)
+    public override void StartTransition(Action onCompleteTransition = null, bool reverseTransition = false)
     {
         Vector3 finalPosition = transform.position;
         transform.DOMoveY(finalPosition.y + magnitude, duration).OnComplete(() =>

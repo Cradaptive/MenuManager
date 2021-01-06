@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cradaptive.TransitionsTypes;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(ScreenOpener), typeof(ScreenCloser))]
 public class TransitionElement : MonoBehaviour
 {
-    public ScreenCloser screenCloser;
+    ScreenCloser screenCloser;
     ScreenOpener screenOpener;
     [HideInInspector, Header("Opening Settings")]
     public TransitionType openingTransitionType;
@@ -15,6 +16,7 @@ public class TransitionElement : MonoBehaviour
     [HideInInspector]
     public MoveDirection entryDirection;
     MoveTransitionData OpeningTransitionData = new MoveTransitionData();
+    public UnityEvent OnOpenTranstionCompleted;
 
     [HideInInspector, Header("Closing Settings")]
     public TransitionType closingTransitionType;
@@ -23,7 +25,7 @@ public class TransitionElement : MonoBehaviour
     [HideInInspector]
     public MoveDirection exitDirection;
     MoveTransitionData ClosingTransitionData = new MoveTransitionData();
-
+    public UnityEvent OnCloseTranstionCompleted;
 
     private void Awake()
     {
@@ -76,26 +78,9 @@ public class TransitionElement : MonoBehaviour
         {
             case TransitionType.Fade:
                 transition = gameObject.AddComponent<FadeTransition>();
-                //if (TryGetComponent(out FadeTransition fade))
-                //{
-                //    transition = fade;
-                //}
-                //else
-                //{
-                //    transition = gameObject.AddComponent<FadeTransition>();
-                //}
                 break;
             case TransitionType.Move:
                 transition = gameObject.AddComponent<MoveTransition>();
-                //if (TryGetComponent(out MoveTransition move))
-                //{
-                //    transition = move as Transition;
-                //}
-                //else
-                //{
-                //    transition = gameObject.AddComponent<MoveTransition>();
-                //}
-
                 break;
         }
         return transition;

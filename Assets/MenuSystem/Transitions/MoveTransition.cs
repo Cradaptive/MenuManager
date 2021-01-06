@@ -21,9 +21,9 @@ public class MoveTransition : Transition
         moveTransitionData = complexTransitionData as MoveTransitionData;
     }
 
-    public override void StartTransition(Action onCompleteTransition = null, float delay = 0, bool reverseTransition = false)
+    public override void StartTransition(Action onCompleteTransition = null, bool reverseTransition = false)
     {
-        base.StartTransition(onCompleteTransition, delay, reverseTransition);
+        base.StartTransition(onCompleteTransition, reverseTransition);
 
         prevTween?.Kill();
 

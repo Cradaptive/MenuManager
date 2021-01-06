@@ -24,25 +24,9 @@ public abstract class Transition : MonoBehaviour
         {
             case TransitionHelperType.Bounce:
                 helper = gameObject.AddComponent<BounceTransitionHelper>();
-                //if (TryGetComponent(out BounceTransitionHelper bounceHelper))
-                //{
-                //    helper = bounceHelper;
-                //}
-                //else
-                //{
-                //    helper = gameObject.AddComponent<BounceTransitionHelper>();
-                //}
                 break;
             case TransitionHelperType.Shake:
                 helper = gameObject.AddComponent<ShakeTransitionHelper>();
-                //if (TryGetComponent(out ShakeTransitionHelper shakeHelper))
-                //{
-                //    helper = shakeHelper as TransitionHelper;
-                //}
-                //else
-                //{
-                //    helper = gameObject.AddComponent<ShakeTransitionHelper>();
-                //}
                 break;
         }
         return helper;
@@ -55,7 +39,7 @@ public abstract class Transition : MonoBehaviour
         exitTransitionHelper = GetTransition(transitionData.exitTransitionHelper);
     }
 
-    public virtual void StartTransition(Action onCompleteTransition = null, float delay = 0, bool reverseTransition = false)
+    public virtual void StartTransition(Action onCompleteTransition = null,  bool reverseTransition = false)
     {
         gameObject.SetActive(true);
     }

@@ -14,9 +14,6 @@ public class TransitionElementEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
-
-
         var transitionElement = target as TransitionElement;
         if (GUILayout.Button("Setup"))
         {
@@ -60,6 +57,7 @@ public class TransitionElementEditor : Editor
             transitionElement.preClosingTransitionEffect = (TransitionHelperType)EditorGUILayout.EnumPopup("Before Closing Effect:", transitionElement.preClosingTransitionEffect);
         }
 
+        base.OnInspectorGUI();
     }
 
     public void ResetValues()

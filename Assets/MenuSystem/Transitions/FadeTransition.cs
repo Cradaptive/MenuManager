@@ -12,9 +12,9 @@ public class FadeTransition : Transition
     Tween prevTween;
     float magnitude = 1, duration = .5f, delay = 0;
 
-    public override void StartTransition(Action onCompleteTransition = null, float delay = 0, bool reverseTransition = false)
+    public override void StartTransition(Action onCompleteTransition = null, bool reverseTransition = false)
     {
-        base.StartTransition(onCompleteTransition, delay, reverseTransition);
+        base.StartTransition(onCompleteTransition,  reverseTransition);
 
         prevTween?.Kill();
 

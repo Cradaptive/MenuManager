@@ -12,7 +12,7 @@ public abstract class TransitionHelper : MonoBehaviour
      
     }
 
-    public virtual void StartTransition(Action onCompleteTransition = null, float delay = 0, bool reverseTransition = false)
+    public virtual void StartTransition(Action onCompleteTransition = null, bool reverseTransition = false)
     {
 
     }
@@ -22,7 +22,7 @@ public class ShakeTransitionHelper : TransitionHelper
 {
     float magnitude = 15, duration = .04f, delay = 0;
 
-    public override void StartTransition(Action onCompleteTransition = null, float delay = 0, bool reverseTransition = false)
+    public override void StartTransition(Action onCompleteTransition = null, bool reverseTransition = false)
     {
         Vector3 finalPosition = transform.position;
 
@@ -47,6 +47,6 @@ public class ShakeTransitionHelper : TransitionHelper
                     });
                 });
             });
-        });
+        }).SetDelay(delay);
     }
 }
