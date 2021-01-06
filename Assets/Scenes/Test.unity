@@ -382,10 +382,6 @@ GameObject:
   - component: {fileID: 1472881324}
   - component: {fileID: 1472881323}
   - component: {fileID: 1472881322}
-  - component: {fileID: 1472881321}
-  - component: {fileID: 1472881320}
-  - component: {fileID: 1472881319}
-  - component: {fileID: 1472881318}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -451,57 +447,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472881314}
   m_CullTransparentMesh: 1
---- !u!114 &1472881318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472881314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 267487e2b76b2f9448a37c4a6cebf710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1472881319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472881314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a5dcb5dcffec644b8efac842d4d163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1472881320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472881314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74b2539800bbd85489ddf6f583d263a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magnitude: 15
-  duration: 0.09
-  delay: 0
---- !u!114 &1472881321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472881314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a5dcb5dcffec644b8efac842d4d163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1472881322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,13 +459,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0450c64027e4f824395dd4ffe9283d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenCloser: {fileID: 1472881323}
-  openingTransitionType: 2
+  openingTransitionType: 0
   postOpeningTransitionEffect: 1
   entryDirection: 2
-  closingTransitionType: 2
+  OnOpeningTransitionCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  closingTransitionType: 0
   preClosingTransitionEffect: 2
   exitDirection: 3
+  OnClosingTransitionCompleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1472881323
 MonoBehaviour:
   m_ObjectHideFlags: 0

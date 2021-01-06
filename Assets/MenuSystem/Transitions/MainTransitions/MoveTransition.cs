@@ -9,7 +9,7 @@ public enum MoveDirection { Top, Bottom, Left, Right }
 
 public class MoveTransition : Transition
 {
-    Tween prevTween;
+
     float upMagnitude = 1500;
     MoveDirection currentEntryDirection;
     float magnitude = 3000, duration = .5f, delay = 0;
@@ -25,43 +25,9 @@ public class MoveTransition : Transition
     {
         base.StartTransition(onCompleteTransition, reverseTransition);
 
-        prevTween?.Kill();
-
-        if (entryTransitionHelper == null && exitTransitionHelper == null)
-        {
-            MainTranslation(onCompleteTransition, delay, reverseTransition);
-        }
-        else
-        {
-            if (!reverseTransition)
-            {
-                MainTranslation(() =>
-                {
-                    if (entryTransitionHelper != null)
-                    {
-                        entryTransitionHelper.StartTransition(() =>
-                        {
-                            onCompleteTransition?.Invoke();
-                        });
-                    }
-
-                }, delay, reverseTransition);
-            }
-            else
-            {
-                if (exitTransitionHelper != null)
-                {
-                    exitTransitionHelper.StartTransition(() =>
-                    {
-                        MainTranslation(onCompleteTransition, delay, reverseTransition);
-                    });
-                }
-            }
-        }
-
     }
 
-    public void MainTranslation(Action onCompleteTransition = null, float delay = 0, bool reverseTransition = false)
+    public override void MainTranslation(Action onCompleteTransition = null, bool reverseTransition = false)
     {
         float finalX = 0;
         float finalY = 0;
@@ -95,6 +61,7 @@ public class MoveTransition : Transition
 
         prevTween = transform.DOLocalMove(new Vector3(finalX, finalY, 0), duration).SetDelay(delay).OnComplete(() =>
         {
+            transitionData?.OnClosingTransitionCompleted?.Invoke();
             onCompleteTransition?.Invoke();
         });
     }

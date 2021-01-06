@@ -16,7 +16,7 @@ public class TransitionElement : MonoBehaviour
     [HideInInspector]
     public MoveDirection entryDirection;
     MoveTransitionData OpeningTransitionData = new MoveTransitionData();
-    public UnityEvent OnOpenTranstionCompleted;
+    public UnityEvent OnOpeningTransitionCompleted;
 
     [HideInInspector, Header("Closing Settings")]
     public TransitionType closingTransitionType;
@@ -25,7 +25,7 @@ public class TransitionElement : MonoBehaviour
     [HideInInspector]
     public MoveDirection exitDirection;
     MoveTransitionData ClosingTransitionData = new MoveTransitionData();
-    public UnityEvent OnCloseTranstionCompleted;
+    public UnityEvent OnClosingTransitionCompleted;
 
     private void Awake()
     {
@@ -57,6 +57,7 @@ public class TransitionElement : MonoBehaviour
             ClosingTransitionData = new MoveTransitionData();
             ClosingTransitionData.exitDirection = exitDirection;
             ClosingTransitionData.exitTransitionHelper = preClosingTransitionEffect;
+            ClosingTransitionData.OnClosingTransitionCompleted = OnClosingTransitionCompleted;
             transition.SetUpData(ClosingTransitionData);
         }
         screenCloser.SetUpTranstion(transition);
@@ -66,6 +67,7 @@ public class TransitionElement : MonoBehaviour
             OpeningTransitionData = new MoveTransitionData();
             OpeningTransitionData.entryDirection = entryDirection;
             OpeningTransitionData.entryTransitionHelper = postOpeningTransitionEffect;
+            OpeningTransitionData.OnOpeningTransitionCompleted = OnOpeningTransitionCompleted;
             transition.SetUpData(OpeningTransitionData);
         }
         screenOpener.SetUpTranstion(transition);

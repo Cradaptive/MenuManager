@@ -4,52 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cradaptive.TransitionsTypes;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+
 
 [RequireComponent(typeof(CanvasGroup))]
 public class FadeTransition : Transition
 {
     CanvasGroup canvasGroup;
-    Tween prevTween;
     float magnitude = 1, duration = .5f, delay = 0;
-
-    public override void StartTransition(Action onCompleteTransition = null, bool reverseTransition = false)
-    {
-        base.StartTransition(onCompleteTransition,  reverseTransition);
-
-        prevTween?.Kill();
-
-        if (entryTransitionHelper == null && exitTransitionHelper == null)
-        {
-            MainTranslation(onCompleteTransition, delay, reverseTransition);
-        }
-        else
-        {
-            if (!reverseTransition)
-            {
-                MainTranslation(() =>
-                {
-                    if (entryTransitionHelper != null)
-                    {
-                        entryTransitionHelper.StartTransition(() =>
-                        {
-                            onCompleteTransition?.Invoke();
-                        });
-                    }
-
-                }, delay, reverseTransition);
-            }
-            else
-            {
-                if (exitTransitionHelper != null)
-                {
-                    exitTransitionHelper.StartTransition(() =>
-                    {
-                        MainTranslation(onCompleteTransition, delay, reverseTransition);
-                    });
-                }
-            }
-        }
-    }
 
     public void MainTranslation(Action onCompleteTransition = null, float delay = 0, bool reverseTransition = false)
     {
@@ -68,6 +31,7 @@ public class FadeTransition : Transition
         {
             prevTween = canvasGroup.DOFade(localMagnitude, duration).OnComplete(() =>
             {
+                transitionData?.OnClosingTransitionCompleted?.Invoke();
                 onCompleteTransition?.Invoke();
                 canvasGroup.interactable = canvasGroup.blocksRaycasts = state;
                 gameObject?.SetActive(state);
