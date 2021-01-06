@@ -6,7 +6,7 @@ using Cradaptive.TransitionsTypes;
 [RequireComponent(typeof(ScreenOpener), typeof(ScreenCloser))]
 public class TransitionElement : MonoBehaviour
 {
-    ScreenCloser screenCloser;
+    public ScreenCloser screenCloser;
     ScreenOpener screenOpener;
     [HideInInspector, Header("Opening Settings")]
     public TransitionType openingTransitionType;
@@ -27,8 +27,7 @@ public class TransitionElement : MonoBehaviour
 
     private void Awake()
     {
-
-        // SetUpTransitions();
+        SetUpTransitions();
     }
 
     public void SetUpTransitions()
