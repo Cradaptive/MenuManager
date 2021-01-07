@@ -17,7 +17,6 @@ public class GroupTransitionElements : MonoBehaviour
 
     private void OnEnable()
     {
-        //    startTransitionOfNextElement.AddListener(StartTransitionOfNextElement);
         onBroadCastElementCompletedTransition.AddListener(ElementTransitionCompleted);
     }
 

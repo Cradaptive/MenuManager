@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cradaptive.TransitionsTypes;
 using UnityEngine.Events;
+using System.Linq;
+using System;
 
 [RequireComponent(typeof(ScreenOpener), typeof(ScreenCloser))]
 public class TransitionElement : MonoBehaviour
@@ -40,11 +42,12 @@ public class TransitionElement : MonoBehaviour
         this.transitionGroup = transitionGroup;
         transitionGroup.startTransitionOfNextElement.AddListener(Run);
         transitionGroup.reverseTransitionOfNextElement.AddListener(Reverse);
+        heirachy = Array.IndexOf(transitionGroup.transitionElements, this);
     }
 
     public void Run(int heirachy)
     {
-        if(this.heirachy == heirachy)
+        if (this.heirachy == heirachy)
         {
             StartTransition(() =>
             {
