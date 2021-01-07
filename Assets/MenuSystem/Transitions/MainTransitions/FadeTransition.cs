@@ -12,20 +12,20 @@ using UnityEngine.EventSystems;
 public class FadeTransition : Transition
 {
     CanvasGroup canvasGroup;
-    float magnitude = 1, duration = .5f, delay = 0;
+    float magnitude = 1, duration = 1f, delay = 0;
 
-    public void MainTranslation(Action onCompleteTransition = null, float delay = 0, bool reverseTransition = false)
+    public override void ReAdjustElements()
+    {
+        gameObject.SetActive(true);
+        transform.localScale = Vector3.one;
+    }
+
+    public override void MainTranslation(Action onCompleteTransition = null, bool reverseTransition = false)
     {
         canvasGroup = GetComponent<CanvasGroup>();
 
-        transform.localPosition = Vector3.zero;
-
-        if (reverseTransition && canvasGroup != null)
-        {
-            canvasGroup.alpha = 0;
-        }
-
-        float localMagnitude = reverseTransition ? 0 : magnitude;
+        float localMagnitude = reverseTransition ? 0f : magnitude;
+        canvasGroup.alpha = canvasGroup!=null && !reverseTransition ? 0f : magnitude;
         bool state = !reverseTransition;
         if (canvasGroup != null)
         {
@@ -34,7 +34,7 @@ public class FadeTransition : Transition
                 transitionData?.OnClosingTransitionCompleted?.Invoke();
                 onCompleteTransition?.Invoke();
                 canvasGroup.interactable = canvasGroup.blocksRaycasts = state;
-                gameObject?.SetActive(state);
+                
             }).SetDelay(delay);
         }
         else

@@ -34,6 +34,7 @@ public class ScreenCloser : UIAffector
         }
         else
         {
+            Debug.LogError("There was no transition, Closing Screen without transition");
             gameObject.SetActive(false);
             onClose?.Invoke();
         }

@@ -18,6 +18,7 @@ public class ScreenOpener : UIAffector
         }
         else
         {
+            Debug.LogError("There was no transition, Closing Screen without transition");
             gameObject.SetActive(true);
             onOpen?.Invoke();
         }

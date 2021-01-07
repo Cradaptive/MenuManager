@@ -6,10 +6,32 @@ using UnityEngine;
 
 public class ScaleTransition : Transition
 {
-    float magnitude = 3000, duration = .5f, delay = 0;
-
-    public void MainTranslation(Action onCompleteTransition = null, float delay = 0, bool reverseTransition = false)
+    public float duration = .5f, delay = 0;
+    [ContextMenu("Test Transition")]
+    public override void TestTransition()
     {
+        Debug.LogError("testing scale");
+        StartTransition();
+    }
+
+    public override void ReAdjustElements()
+    {
+        gameObject.SetActive(true);
+        transform.localPosition = prevPosition;
+    }
+
+    public override void MainTranslation(Action onCompleteTransition = null,  bool reverseTransition = false)
+    {
+        Vector3 localMagnitude = reverseTransition ? Vector3.zero : Vector3.one;
+        transform.localScale = !reverseTransition ? Vector3.zero : Vector3.one;
+
+        bool state = !reverseTransition;
+
+        prevTween = transform.DOScale(localMagnitude, duration).OnComplete(() =>
+        {
+            transitionData?.OnClosingTransitionCompleted?.Invoke();
+            onCompleteTransition?.Invoke();
+        }).SetDelay(delay);
 
     }
 

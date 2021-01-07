@@ -7,7 +7,7 @@ using DG.Tweening;
 
 namespace Cradaptive.TransitionsTypes
 {
-    public enum TransitionType { None, Fade, Move }
+    public enum TransitionType { None, Fade, Move, Scale }
     public enum TransitionHelperType { None,Shake, Bounce }
     public enum TransitionHelperOwner { Opener, Closer }
 }
@@ -18,6 +18,18 @@ public abstract class Transition : MonoBehaviour
     protected TransitionHelper entryTransitionHelper;
     protected TransitionHelper exitTransitionHelper;
     protected ComplexTransitionData transitionData;
+    protected Vector3 prevPosition;
+    private void Awake()
+    {
+        prevPosition = transform.localPosition;
+    }
+
+    [ContextMenu("Test Transition")]
+    public virtual void TestTransition()
+    {
+
+    }
+
 
     public TransitionHelper GetTransition(TransitionHelperType transitionHelperType)
     {
@@ -41,9 +53,15 @@ public abstract class Transition : MonoBehaviour
         exitTransitionHelper = GetTransition(transitionData.exitTransitionHelper);
     }
 
+    public virtual void ReAdjustElements()
+    {
+
+    }
+
     public virtual void StartTransition(Action onCompleteTransition = null,  bool reverseTransition = false)
     {
-        gameObject.SetActive(true);
+        ReAdjustElements();
+
         prevTween?.Kill();
 
         if (entryTransitionHelper == null && exitTransitionHelper == null)
@@ -62,6 +80,7 @@ public abstract class Transition : MonoBehaviour
                         {
                             transitionData?.OnOpeningTransitionCompleted?.Invoke();
                             onCompleteTransition?.Invoke();
+                           
                         });
                     }
 
@@ -73,7 +92,7 @@ public abstract class Transition : MonoBehaviour
                 {
                     exitTransitionHelper.StartTransition(() =>
                     {
-                        MainTranslation(onCompleteTransition, reverseTransition);
+                        MainTranslation(()=> { onCompleteTransition?.Invoke(); ReAdjustElements(); }, reverseTransition);
                     });
                 }
             }

@@ -84,6 +84,9 @@ public class TransitionElement : MonoBehaviour
             case TransitionType.Move:
                 transition = gameObject.AddComponent<MoveTransition>();
                 break;
+            case TransitionType.Scale:
+                transition = gameObject.AddComponent<ScaleTransition>();
+                break;
         }
         return transition;
     }
