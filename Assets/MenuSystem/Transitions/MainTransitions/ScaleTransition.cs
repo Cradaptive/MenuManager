@@ -4,8 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ScaleDirection { AllDirection, TopDown, BottomUp, LeftRight, RightLeft }
+
 public class ScaleTransition : Transition
 {
+    MoveDirection currentScaleDirection;
     public float duration = .5f, delay = 0;
     [ContextMenu("Test Transition")]
     public override void TestTransition()
@@ -18,6 +21,10 @@ public class ScaleTransition : Transition
     {
         gameObject.SetActive(true);
         transform.localPosition = prevPosition;
+        if (TryGetComponent(out CanvasGroup cg))
+        {
+            cg.alpha = 1;
+        }
     }
 
     public override void MainTranslation(Action onCompleteTransition = null,  bool reverseTransition = false)

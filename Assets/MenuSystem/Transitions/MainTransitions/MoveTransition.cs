@@ -13,7 +13,7 @@ public class MoveTransition : Transition
     MoveDirection currentEntryDirection;
     float magnitude = 1000, duration = 1f, delay = 0;
     MoveTransitionData moveTransitionData;
-    Vector3 currentPosition;
+    public Vector3 currentPosition;
 
     private void Awake()
     {
@@ -29,6 +29,10 @@ public class MoveTransition : Transition
     {
         gameObject.SetActive(true);
         transform.localScale = Vector3.one;
+        if (TryGetComponent(out CanvasGroup cg))
+        {
+            cg.alpha = 1;
+        }
     }
 
     public override void StartTransition(Action onCompleteTransition = null, bool reverseTransition = false)
@@ -41,30 +45,34 @@ public class MoveTransition : Transition
     {
         float finalX = 0;
         float finalY = 0;
-        Vector3 startPosition = reverseTransition ? Vector3.zero : new Vector3(-magnitude, 0, 0);
+        Vector3 startPosition = reverseTransition ? currentPosition : new Vector3(-magnitude, currentPosition.y, 0);
 
         currentEntryDirection = reverseTransition ? moveTransitionData.exitDirection : moveTransitionData.entryDirection;
 
 
         if (currentEntryDirection == MoveDirection.Left)
         {
-            startPosition = reverseTransition ? currentPosition : new Vector3(-magnitude, currentPosition.y, 0);
-            finalX = reverseTransition ? -magnitude : 0;
+            startPosition = reverseTransition ? currentPosition : new Vector3(-magnitude, currentPosition.y, currentPosition.z);
+            finalX = reverseTransition ? -magnitude : currentPosition.x;
+            finalY = currentPosition.y;
         }
         else if (currentEntryDirection == MoveDirection.Right)
         {
-            startPosition = reverseTransition ? currentPosition : new Vector3(magnitude, currentPosition.y, 0);
-            finalX = reverseTransition ? magnitude : 0;
+            startPosition = reverseTransition ? currentPosition : new Vector3(magnitude, currentPosition.y, currentPosition.z);
+            finalX = reverseTransition ? magnitude : currentPosition.x;
+            finalY = currentPosition.y;
         }
         else if (currentEntryDirection == MoveDirection.Bottom)
         {
-            startPosition = reverseTransition ? currentPosition : new Vector3(currentPosition.z, -upMagnitude, 0);
-            finalY = reverseTransition ? -magnitude : 0;
+            startPosition = reverseTransition ? currentPosition : new Vector3(currentPosition.x, -upMagnitude, currentPosition.z);
+            finalY = reverseTransition ? -magnitude : currentPosition.y;
+            finalX = currentPosition.x;
         }
         else if (currentEntryDirection == MoveDirection.Top)
         {
-            startPosition = reverseTransition ? currentPosition : new Vector3(currentPosition.z, upMagnitude, 0);
-            finalY = reverseTransition ? magnitude : 0;
+            startPosition = reverseTransition ? currentPosition : new Vector3(currentPosition.x, upMagnitude, currentPosition.z);
+            finalY = reverseTransition ? magnitude : currentPosition.y;
+            finalX = currentPosition.x;
         }
 
         transform.localPosition = startPosition;

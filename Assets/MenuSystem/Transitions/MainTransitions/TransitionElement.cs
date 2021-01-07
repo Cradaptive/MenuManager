@@ -7,6 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(ScreenOpener), typeof(ScreenCloser))]
 public class TransitionElement : MonoBehaviour
 {
+    public int heirachy;
     ScreenCloser screenCloser;
     ScreenOpener screenOpener;
     [HideInInspector, Header("Opening Settings")]
@@ -73,7 +74,7 @@ public class TransitionElement : MonoBehaviour
         screenOpener.SetUpTranstion(transition);
     }
 
-    public Transition GetTransition(TransitionType transitionHelperType)
+    Transition GetTransition(TransitionType transitionHelperType)
     {
         Transition transition = null;
         switch (transitionHelperType)
