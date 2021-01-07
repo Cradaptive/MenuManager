@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0450c64027e4f824395dd4ffe9283d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heirachy: 0
+  heirachy: 3
   openingTransitionType: 2
   postOpeningTransitionEffect: 1
   entryDirection: 1
@@ -427,6 +427,7 @@ MonoBehaviour:
   OnClosingTransitionCompleted:
     m_PersistentCalls:
       m_Calls: []
+  alreadyAdded: 0
 --- !u!114 &792941715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,7 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0450c64027e4f824395dd4ffe9283d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heirachy: 0
+  heirachy: 4
   openingTransitionType: 3
   postOpeningTransitionEffect: 1
   entryDirection: 2
@@ -679,6 +680,7 @@ MonoBehaviour:
   OnClosingTransitionCompleted:
     m_PersistentCalls:
       m_Calls: []
+  alreadyAdded: 0
 --- !u!114 &975315101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1187,6 +1189,7 @@ MonoBehaviour:
   OnClosingTransitionCompleted:
     m_PersistentCalls:
       m_Calls: []
+  alreadyAdded: 0
 --- !u!114 &1472881323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,6 +1363,7 @@ MonoBehaviour:
   OnClosingTransitionCompleted:
     m_PersistentCalls:
       m_Calls: []
+  alreadyAdded: 0
 --- !u!114 &1506079433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1521,7 +1525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0450c64027e4f824395dd4ffe9283d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heirachy: 0
+  heirachy: 1
   openingTransitionType: 2
   postOpeningTransitionEffect: 2
   entryDirection: 0
@@ -1534,6 +1538,7 @@ MonoBehaviour:
   OnClosingTransitionCompleted:
     m_PersistentCalls:
       m_Calls: []
+  alreadyAdded: 0
 --- !u!114 &1797916027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1695,8 +1700,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7915cfa027fd8084e99af6577039fa04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionElements: []
   findElementsInChildren: 1
+  controlWithHeirachy: 1
+  transitionElements: []
 --- !u!114 &1865167637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1789,7 +1795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0450c64027e4f824395dd4ffe9283d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heirachy: 0
+  heirachy: 2
   openingTransitionType: 1
   postOpeningTransitionEffect: 1
   entryDirection: 2
@@ -1802,6 +1808,7 @@ MonoBehaviour:
   OnClosingTransitionCompleted:
     m_PersistentCalls:
       m_Calls: []
+  alreadyAdded: 0
 --- !u!114 &1950235156
 MonoBehaviour:
   m_ObjectHideFlags: 0

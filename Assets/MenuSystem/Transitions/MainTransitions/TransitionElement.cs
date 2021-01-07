@@ -27,10 +27,41 @@ public class TransitionElement : MonoBehaviour
     public MoveDirection exitDirection;
     MoveTransitionData ClosingTransitionData = new MoveTransitionData();
     public UnityEvent OnClosingTransitionCompleted;
+    GroupTransitionElements transitionGroup;
+    public bool alreadyAdded;
 
     private void Awake()
     {
         SetUpTransitions();
+    }
+
+    public void SetTransitionGroup(GroupTransitionElements transitionGroup)
+    {
+        this.transitionGroup = transitionGroup;
+        transitionGroup.startTransitionOfNextElement.AddListener(Run);
+        transitionGroup.reverseTransitionOfNextElement.AddListener(Reverse);
+    }
+
+    public void Run(int heirachy)
+    {
+        if(this.heirachy == heirachy)
+        {
+            StartTransition(() =>
+            {
+                transitionGroup?.onBroadCastElementCompletedTransition?.Invoke(heirachy);
+            });
+        }
+    }
+
+    public void Reverse(int heirachy)
+    {
+        if (this.heirachy == heirachy)
+        {
+            ReverseTransition(() =>
+            {
+                transitionGroup?.onBroadCastElementCompletedTransition?.Invoke(heirachy);
+            });
+        }
     }
 
     public void SetUpTransitions()
@@ -94,13 +125,23 @@ public class TransitionElement : MonoBehaviour
     [ContextMenu("Open Menu")]
     public void Open()
     {
-        screenOpener.Open();
+        screenOpener.Run();
+    }
+
+    public void StartTransition(UnityAction onCompleteTransition)
+    {
+        screenOpener.Run(onCompleteTransition);
+    }
+
+    public void ReverseTransition(UnityAction onCompleteTransition)
+    {
+        screenCloser.Run(onCompleteTransition);
     }
 
     [ContextMenu("Close Menu")]
     public void Close()
     {
-        screenCloser.Close();
+        screenCloser.Run();
     }
 
 }

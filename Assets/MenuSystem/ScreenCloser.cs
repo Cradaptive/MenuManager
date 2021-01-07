@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using System;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public abstract class UIAffector : MonoBehaviour
 {
@@ -11,7 +11,13 @@ public abstract class UIAffector : MonoBehaviour
     {
         this.transition = transition;
     }
+
     public virtual void Run()
+    {
+
+    }
+
+    public virtual void Run(UnityAction onComplete)
     {
 
     }
@@ -23,20 +29,20 @@ public class ScreenCloser : UIAffector
     [ContextMenu("TestCloseMenu")]
     public override void Run()
     {
-        Close(null);
+        Run(null);
     }
 
-    public void Close(Action onClose = null)
+    public override void Run(UnityAction onComplete = null)
     {
         if (transition != null)
         {
-            transition.StartTransition(reverseTransition: true);
+            transition.StartTransition(onComplete, reverseTransition: true);
         }
         else
         {
             Debug.LogError("There was no transition, Closing Screen without transition");
             gameObject.SetActive(false);
-            onClose?.Invoke();
+            onComplete?.Invoke();
         }
     }
 }

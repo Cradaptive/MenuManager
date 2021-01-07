@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Cradaptive.TransitionsTypes;
+using UnityEngine.Events;
 
 public enum MoveDirection { Top, Bottom, Left, Right }
 
@@ -35,13 +36,13 @@ public class MoveTransition : Transition
         }
     }
 
-    public override void StartTransition(Action onCompleteTransition = null, bool reverseTransition = false)
+    public override void StartTransition(UnityAction onCompleteTransition = null, bool reverseTransition = false)
     {
         base.StartTransition(onCompleteTransition, reverseTransition);
 
     }
 
-    public override void MainTranslation(Action onCompleteTransition = null, bool reverseTransition = false)
+    public override void MainTranslation(UnityAction onCompleteTransition = null, bool reverseTransition = false)
     {
         float finalX = 0;
         float finalY = 0;

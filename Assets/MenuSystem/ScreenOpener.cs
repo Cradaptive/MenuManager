@@ -2,25 +2,26 @@
 using DG.Tweening;
 using System;
 using System.Threading.Tasks;
+using UnityEngine.Events;
 
 public class ScreenOpener : UIAffector
 {
     [ContextMenu("TestOpenMenu")]
     public override void Run()
     {
-        Open();
+        Run();
     }
-    public void Open(Action onOpen = null)
+    public override void Run(UnityAction onComplete = null)
     {
         if(transition!=null)
         {
-            transition.StartTransition();
+            transition.StartTransition(onComplete);
         }
         else
         {
             Debug.LogError("There was no transition, Closing Screen without transition");
             gameObject.SetActive(true);
-            onOpen?.Invoke();
+            onComplete?.Invoke();
         }
     }
 }

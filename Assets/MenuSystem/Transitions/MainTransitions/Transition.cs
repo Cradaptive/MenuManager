@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cradaptive.TransitionsTypes;
 using DG.Tweening;
+using UnityEngine.Events;
 
 namespace Cradaptive.TransitionsTypes
 {
@@ -58,7 +59,7 @@ public abstract class Transition : MonoBehaviour
 
     }
 
-    public virtual void StartTransition(Action onCompleteTransition = null,  bool reverseTransition = false)
+    public virtual void StartTransition(UnityAction onCompleteTransition = null,  bool reverseTransition = false)
     {
         ReAdjustElements();
 
@@ -99,7 +100,7 @@ public abstract class Transition : MonoBehaviour
         }
     }
 
-    public virtual void MainTranslation(Action onCompleteTransition = null, bool reverseTransition = false)
+    public virtual void MainTranslation(UnityAction onCompleteTransition = null, bool reverseTransition = false)
     {
 
     }

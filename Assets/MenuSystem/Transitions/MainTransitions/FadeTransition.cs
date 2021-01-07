@@ -20,7 +20,7 @@ public class FadeTransition : Transition
         transform.localScale = Vector3.one;
     }
 
-    public override void MainTranslation(Action onCompleteTransition = null, bool reverseTransition = false)
+    public override void MainTranslation(UnityAction onCompleteTransition = null, bool reverseTransition = false)
     {
         canvasGroup = GetComponent<CanvasGroup>();
 
