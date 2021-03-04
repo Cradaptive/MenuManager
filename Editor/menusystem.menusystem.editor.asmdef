@@ -1,0 +1,16 @@
+{
+    "name": "menusystem.menusystem.editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:eb09446c0ad9487449e0557d7a483469"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
